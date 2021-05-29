@@ -1,37 +1,10 @@
-## Welcome to GitHub Pages
+[<img title="Algorand QR Code Generator (Banner art by Stasya Tikhonova, curtsey of Algorand)" src="./images/algorand-qrcode-banner.jpg">](https://developer.algorand.org/solutions/algorand-qrcode-generator-javascript/)
 
-You can use the [editor on GitHub](https://github.com/emg110/algorandqrcode/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Algorand QR Code Generator
+[![npm](https://img.shields.io/static/v1?label=Algorand&message=Published&color=green&style=flat-square)](https://developer.algorand.org/solutions/algorand-qr-code-generator-javascript/)
+[![npm](https://img.shields.io/static/v1?label=npm&message=OK&color=green&style=flat-square)](https://www.npmjs.com/package/algorand-qrcode)
+[![npm](https://img.shields.io/static/v1?label=license&message=MIT&color=green&style=flat-square)](https://github.com/emg110/algorand-qrcode/blob/master/license)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This is just a website with Algorand QR Code generation example form and presenting `algorand-qrcode` library capabilities. For code, issues and documentations please visit [GitHub Repository](https://github.com/emg110/algorand-qrcode)
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/emg110/algorandqrcode/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Algorand QR Code Generator is A comprehensive javascript module with a complete set of tools to generate an standard Algorand URI (RFC 3986) and  QR code, exportable to SVG, PNG and UTF8. Exported media types are File, UTF8 text and DataURL. Works in Terminal, Node and modern browsers. Contains a full set of examples including API server, static server and web form QR generator. Includes a full featured CLI to generate QR codes in terminals too.
