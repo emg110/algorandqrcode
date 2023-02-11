@@ -260,28 +260,11 @@
       </div>
     </div>
 
-    <div class="row">
-
-      <div class="col-13">
-        <label for="inverse">Inverse</label>
-      </div>
-      <div class="col-25">
-        <input id="inverse" type="checkbox" name="inverse" />
-      </div>
-    </div>
 
 
 
-    <div class="row">
-      <div class="col-15">
-        <label for="version">Version</label>
-      </div>
-      <div class="col-75">
-        <select id="version" name="version">
-          <option>Auto</option>
-        </select>
-      </div>
-    </div>
+
+
 
     <div class="row">      
       <div class="col-15">
@@ -299,17 +282,12 @@
     </div>
     <div class="row">      
       <div class="col-15">
-        <label for="margin">Margin</label>
+        <label for="margin">Padding</label>
       </div>
       <div class="col-25">
         <input id="margin" type="number" name="margin" min="4" value="4" />
       </div>
-      <div class="col-15">
-        <label for="logoSize">Center Logo Size (16-64)</label>
-      </div>
-      <div class="col-25">
-        <input id="logo-size" type="number" name="logoSize" min="16" value="32" />
-      </div>
+   
     </div>
 
     <div class="row">
@@ -377,7 +355,6 @@
 
   <script>
     var errorEl = document.getElementById('error')
-    var versionEl = document.getElementById('version')
     var errorLevelEl = document.getElementById('errorLevel')
     /* var modeEl = document.getElementById('mode') */
     var marginEl = document.getElementById('margin')
@@ -389,7 +366,6 @@
     var noteEl = document.getElementById('note')
 
     var amountEl = document.getElementById('amount')
-    var inverseEl = document.getElementById('inverse')
     var assetEl = document.getElementById('asset')
 
 
@@ -466,8 +442,7 @@
         html: false,
         label: labelEl.value,
         asset: assetEl.value,
-        inverse: inverseEl.checked,
-        version: versionEl.value,
+        version: "Auto",
         errorCorrectionLevel: errorLevelEl.options[errorLevelEl.selectedIndex].text,
         margin: marginEl.value,
         color: {
@@ -514,9 +489,7 @@
     logoSizeEl.disabled = true
     
 
-    for (var i = 1; i <= 40; i++) {
-      versionEl.options[versionEl.options.length] = new Option(i.toString(), i)
-    }
+
 
 
   </script>
