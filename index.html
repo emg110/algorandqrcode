@@ -261,12 +261,7 @@
     </div>
 
     <div class="row">
-      <div class="col-15">
-        <label for="xnote">XNote</label>
-      </div>
-      <div class="col-25">
-        <input id="xnote" type="checkbox" name="xnote" />
-      </div>
+
       <div class="col-13">
         <label for="inverse">Inverse</label>
       </div>
@@ -423,7 +418,7 @@
     var walletEl = document.getElementById('wallet')
     var labelEl = document.getElementById('label')
     var noteEl = document.getElementById('note')
-    var xnoteEl = document.getElementById('xnote')
+
     var amountEl = document.getElementById('amount')
     var inverseEl = document.getElementById('inverse')
     var assetEl = document.getElementById('asset')
@@ -502,7 +497,7 @@
         wallet: walletEl.value,
         amount: amountEl.value,
         note: noteEl.value,
-        xnote: xnoteEl.checked,
+
         withBgLogo: withBgLogoEl.checked,
         withLogo: withLogoEl.checked,
         bgLogo: withBgLogoEl.checked ? readerResultsBg : null,
