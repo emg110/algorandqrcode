@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <title>Algorand QRCode Generator Web Instance</title>
-  <script src="js/qrcode.js"></script> <!-- This doesn't exist in the examples, Build the project before use. -->
-  
+  <title>Algorand QRCode Generator Web Example</title>
+  <script src="js/algoqrcode.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -95,13 +95,13 @@
     }
 
     .button-div {
-      display:block;
+      display: block;
       text-align: right;
       margin-top: 50px;
     }
 
     .qrcode-div {
-      display:block;
+      display: block;
       text-align: center;
       margin-top: 25px;
     }
@@ -251,7 +251,7 @@
     </div>
 
     <div class="row">
-     
+
       <div class="col-15">
         <label for="note">Note</label>
       </div>
@@ -266,7 +266,7 @@
 
 
 
-    <div class="row">      
+    <div class="row">
       <div class="col-15">
         <label for="errorLevel">Error Correction</label>
       </div>
@@ -280,14 +280,14 @@
         </select>
       </div>
     </div>
-    <div class="row">      
+    <div class="row">
       <div class="col-15">
         <label for="margin">Padding</label>
       </div>
       <div class="col-25">
         <input id="margin" type="number" name="margin" min="4" value="4" />
       </div>
-   
+
     </div>
 
     <div class="row">
@@ -307,7 +307,7 @@
 
     </div>
 
-   
+
     <div id="logoImageRow" class="row">
       <div class="col-15">
         <label for="logoImage">QR Code center Image</label>
@@ -331,7 +331,7 @@
 
       <div class="col-35 button-div">
         <button id="generate-button">Create Algorand QR Code</button>
- 
+
       </div>
       <div class="col-35 qrcode-div">
         <p id="error" class="error"></p>
@@ -342,18 +342,21 @@
           class="algorand-uri-container">
           <div class="control">
             <label style="text-align:center;" for="input-algorand-address">Generated Algorand URI:</label>
-            
+
           </div>
-          
+
         </div>
-        
+
       </div>
     </div>
-    <input style="width:100%; bottom:0; margin:auto; display:block;text-align:center" class="algorand-generated-uri" id="algorand-uri-result" placeholder="algorand://"/>
+    <input style="width:100%; bottom:0; margin:auto; display:block;text-align:center" class="algorand-generated-uri"
+      id="algorand-uri-result" placeholder="algorand://" />
 
   </div>
 
-  <script>
+  <script type="module">
+    import algoqrcode from './js/algoqrcode.js'
+   
     var errorEl = document.getElementById('error')
     var errorLevelEl = document.getElementById('errorLevel')
     /* var modeEl = document.getElementById('mode') */
@@ -457,37 +460,43 @@
        *
        * @class QRCode
        * @method toCanvas
-       * @desc The toCanvas method of QRCode will render a QR Code into canvas element argeument using options argument
+       * @desc The toCanvas method of QRCode will render a QR Code into canvas element arguments using options argument
        * @param {*} canvasEl
        * @param {*} options
        * @return {Promise} 
        */
-      QRCode.toCanvas(canvasEl, options).then((res) => {
-        canvasEl.style.display = 'inline'
-        console.log(res.alrorandURI)
-        var algoUriEl = document.getElementById('algorand-uri-result')
-        if (algoUriEl) {
-          algoUriEl.value = res.alrorandURI
-        }
 
-      }).catch((error) => {
-        if (error) {
-          canvasEl.style.display = 'none'
-          errorEl.style.display = 'inline'
-          errorEl.textContent = error
-        }
-      })
+      // QRCode.toCanvas(canvasEl, options).then((res) => {
+      //   canvasEl.style.display = 'inline'
+      //   console.log(res.alrorandURI)
+      //   var algoUriEl = document.getElementById('algorand-uri-result')
+      //   if (algoUriEl) {
+      //     algoUriEl.value = res.alrorandURI
+      //   }
+
+      // }).catch((error) => {
+      //   if (error) {
+      //     canvasEl.style.display = 'none'
+      //     errorEl.style.display = 'inline'
+      //     errorEl.textContent = error
+      //   }
+      // })
+      var algoUriEl = document.getElementById('algorand-uri-result')
+      let qrcode = algoqrcode({ wallet: options.wallet, label: options.label })
+      let svg = qrcode.svg()
+      algoUriEl.value = qrcode.qrcode.dataList[0].data
+
     }
 
 
     //Listens for Generate button click
     generateButton.addEventListener('click', drawQR, false)
-   
+
     logoImageRow.hidden = true
     logoBgImageRow.hidden = true
 
     logoSizeEl.disabled = true
-    
+
 
 
 
