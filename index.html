@@ -98,22 +98,31 @@
       display: block;
       text-align: right;
       margin-top: 50px;
+     
     }
 
     .qrcode-div {
+      width: 100%;
       display: block;
+      margin: auto;
       text-align: center;
       margin-top: 25px;
+      text-align: center;
+      display: flex;
+            flex-direction: column;
+            align-items: center;
     }
 
     #generate-button {
       padding: 10px;
-      display: inline-block;
+      display: block;
+      text-align: center;
+      margin: auto;
     }
 
     #clear-logo-button {
       padding: 10px;
-      display: inline-block;
+      display: block;
     }
 
     .App-logo {
@@ -151,15 +160,14 @@
       }
 
       .button-div {
+        display: block;
+        margin: auto;
         margin-top: 20px;
         text-align: center;
-        vertical-align: middle;
+
       }
 
-      .qrcode-div {
-        text-align: center;
-        vertical-align: middle;
-      }
+     
     }
   </style>
 </head>
@@ -256,7 +264,7 @@
         <label for="note">Note</label>
       </div>
       <div class="col-75">
-        <input id="note" type="text" name="note" placeholder="Note..." value="I have set my network into TESTNET!" />
+        <input id="note" type="text" name="note" placeholder="Note..." value="This is a note" />
       </div>
     </div>
 
@@ -331,12 +339,12 @@
 
       <div class="col-35 button-div">
         <button id="generate-button">Create Algorand QR Code</button>
-
+    
       </div>
       <div class="col-35 qrcode-div">
         <p id="error" class="error"></p>
 
-        <canvas style="border-bottom:10px solid rgb(115, 175, 245); height: 196px;width:196px" id="canvas"
+        <canvas style="border-bottom:10px solid rgb(115, 175, 245);height:196px;width:196px" id="canvas"
           class="qrcode-image"></canvas>
         <div style="min-width:100%;font-size:0.7em;margin:auto;display:block;text-align:center;"
           class="algorand-uri-container">
@@ -346,17 +354,18 @@
           </div>
 
         </div>
-
+        <input style="width:100%; bottom:0; margin:auto; display:block;text-align:center" class="algorand-generated-uri"
+        id="algorand-uri-result" placeholder="algorand://" />
       </div>
+ 
     </div>
-    <input style="width:100%; bottom:0; margin:auto; display:block;text-align:center" class="algorand-generated-uri"
-      id="algorand-uri-result" placeholder="algorand://" />
+
 
   </div>
 
   <script type="module">
     import algoqrcode from './js/algoqrcode.js'
-   
+
     var errorEl = document.getElementById('error')
     var errorLevelEl = document.getElementById('errorLevel')
     /* var modeEl = document.getElementById('mode') */
@@ -483,8 +492,31 @@
       // })
       var algoUriEl = document.getElementById('algorand-uri-result')
       let qrcode = algoqrcode({ wallet: options.wallet, label: options.label })
-      let svg = qrcode.svg()
+      let svgCode = qrcode.svg()
       algoUriEl.value = qrcode.qrcode.dataList[0].data
+      const svgBlob = new Blob([svgCode], { type: 'image/svg+xml;charset=utf-8' });
+      const svgUrl = URL.createObjectURL(svgBlob);
+
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const img = new Image();
+      img.onload = function () {
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const xOffset = (canvas.width - img.width) / 2;
+        const yOffset = (canvas.height - img.height) / 2;
+
+        // Clear the canvas before drawing
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the image with the calculated offsets to center it
+        ctx.drawImage(img, xOffset, yOffset, img.width, img.height);
+
+        URL.revokeObjectURL(svgUrl);
+      };
+      img.src = svgUrl;
 
     }
 
