@@ -442,18 +442,20 @@
      * @desc The drawQR function is called to render QR Code with canvas and based on configuration params via HTML form.
      */
     function drawQR() {
+      let amount = amountEl.value? Number(amountEl.value) : 0
+      let asset = assetEl.value? Number(assetEl.value) : null
       errorEl.style.display = 'none'
       canvasEl.style.display = 'block'
       // Declaring options and getting values from HTML form elements
       let options = {
         wallet: walletEl.value,
-        amount: amountEl.value,
+        amount: amount,
         note: noteEl.value,
 
 
         html: false,
         label: labelEl.value,
-        asset: assetEl.value,
+        asset: asset,
         version: "Auto",
         errorCorrectionLevel: errorLevelEl.options[errorLevelEl.selectedIndex].text,
         margin: marginEl.value,
@@ -491,7 +493,17 @@
       //   }
       // })
       var algoUriEl = document.getElementById('algorand-uri-result')
-      let qrcode = algoqrcode({ wallet: options.wallet, label: options.label })
+      let qrcode = null
+      if(amount >= 1 && !options.label){
+        if(asset > 0){
+          qrcode = algoqrcode({ wallet: options.wallet, asset: options.asset, amount: options.amount, note: options.note })
+        }else{
+          qrcode = algoqrcode({ wallet: options.wallet, amount: options.amount, note: options.note })
+        }
+      }else if(!!options.label && options.label.length > 0){
+         qrcode = algoqrcode({ wallet: options.wallet, label: options.label })
+      }
+      
       let svgCode = qrcode.svg()
       algoUriEl.value = qrcode.qrcode.dataList[0].data
       const svgBlob = new Blob([svgCode], { type: 'image/svg+xml;charset=utf-8' });
