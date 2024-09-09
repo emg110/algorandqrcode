@@ -524,10 +524,10 @@
     //Listens for Generate button click
     generateButton.addEventListener('click', drawQR, false)
 
-    logoImageRow.hidden = true
-    logoBgImageRow.hidden = true
+    if(logoImageRow)logoImageRow.hidden = true
+    if(!!logoBgImageRow)logoBgImageRow.hidden = true
 
-    logoSizeEl.disabled = true
+    if(logoSizeEl)logoSizeEl.disabled = true
 
 
 
